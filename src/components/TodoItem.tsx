@@ -14,8 +14,10 @@ export default ({ item: { id, text, editing, complete }, toggleItem, toggleEditI
   const inputText = useRef<HTMLInputElement>(null);
 
   useEffect(() => inputText?.current?.focus());
+  // 상태 변화 시 포커싱
 
   const acceptEdit = (itemID: number) => {
+    // editing 상태에서 기능구현
     const itemText = inputText?.current?.value?.trim() || '';
 
     if (itemText !== '') {

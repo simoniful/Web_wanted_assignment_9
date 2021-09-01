@@ -10,7 +10,10 @@ interface Props {
 }
 
 const FilterLink = ({ children, filter }: Props) => {
+  // store에서 정적인 상태 불러오기
   const filterSelected: boolean = useSelector((state: ApplicationState) => state.filterState) === filter;
+
+  // dispatch를 통한 액션 생성자 호출
   const dispatch = useDispatch();
   const handleUpdateFilter = useCallback((filter: string) => dispatch(updateFilter(filter)), [dispatch]);
 

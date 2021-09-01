@@ -10,12 +10,14 @@ export default ({ emptyList, addItem }: TodoFormProps) => {
   const inputText = useRef<HTMLInputElement>(null);
 
   const focusInputText = () => inputText?.current?.focus();
+  // input 포커싱 함수
 
   useEffect(() => {
     if (emptyList) focusInputText();
   });
 
   const submitHandler = (e: FormEvent) => {
+    // 제출 시 동작 함수 - text 확인 후 목록 추가 요청
     e.preventDefault();
 
     if (inputText && inputText.current && inputText.current.value !== '') {

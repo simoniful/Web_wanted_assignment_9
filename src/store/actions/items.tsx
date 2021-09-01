@@ -1,4 +1,5 @@
 import { Item, ItemsTypes } from 'utils/types';
+// todo 목록 관련 상태 변화 액션 생성자
 
 export const addItem = (text: string) => ({
   type: ItemsTypes.ADD_ITEM,

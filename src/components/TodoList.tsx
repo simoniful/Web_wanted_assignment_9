@@ -9,6 +9,7 @@ import TodoItem from './TodoItem';
 import TodoMessage from './TodoMessage';
 import { addItem, toggleItem, toggleEditItem, updateItem, removeItem, loadRequest } from '../store/actions/items';
 
+// 필터링 상태에 따른 보여지는 items 필터
 const filterItems = (items: Item[], filter: string) => {
   switch (filter) {
     case VisibilityFilters.SHOW_ACTIVE:
@@ -21,12 +22,13 @@ const filterItems = (items: Item[], filter: string) => {
 };
 
 const TodoList = () => {
+  // store에서 정적인 상태 불러오기
   const filterState: string = useSelector((state: ApplicationState) => state.filterState);
   const items: Item[] = filterItems(
     useSelector((state: ApplicationState) => state.items.data),
     filterState,
   );
-
+  // dispatch를 통한 액션 생성자 호출
   const dispatch = useDispatch();
   const handleAddItem = useCallback((text: string) => dispatch(addItem(text)), [dispatch]);
   const handleToggleItem = useCallback((id: number, complete: boolean) => dispatch(toggleItem(id, complete)), [dispatch]);
@@ -37,9 +39,11 @@ const TodoList = () => {
 
   useEffect(() => {
     handleLoadRequest();
+    // 초기 데이터 불러오기
   }, [handleLoadRequest]);
 
   const getTaskCounter = () =>
+    // 필터에 따른 조건부 반환값 설정, 완료된 목록 파악
     filterState === VisibilityFilters.SHOW_COMPLETED
       ? {
           counter: items.filter((item) => item.complete).length,
